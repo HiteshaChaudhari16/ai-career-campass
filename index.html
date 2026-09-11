@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Career Compass</title>
+
+<style>
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f7f8ff;
+    color:#17203a;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+/* =========================
+   VARIABLES
+========================= */
+:root{
+    --primary:#4f46e5;
+    --secondary:#7c3aed;
+    --blue:#2563eb;
+    --dark:#111827;
+    --text:#17203a;
+    --muted:#667085;
+    --white:#ffffff;
+    --border:#e5e7eb;
+    --gradient:linear-gradient(135deg,#4f46e5,#7c3aed,#2563eb);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+.nav-container{
+    max-width:1250px;
+    margin:auto;
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+    color:var(--primary);
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#7c3aed;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:23px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-links a{
+    color:#4b5563;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--primary);
+}
+
+.login-btn{
+    border:1px solid #d7d9e5;
+    padding:9px 17px;
+    border-radius:10px;
+}
+
+.start-btn{
+    color:white !important;
+    padding:10px 18px;
+    border-radius:10px;
+    background:var(--gradient);
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:none;
+    font-size:27px;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero{
+    min-height:100vh;
+    padding:140px 25px 80px;
+    background:
+        radial-gradient(circle at 10% 20%,rgba(79,70,229,.15),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(124,58,237,.14),transparent 30%),
+        #f8f9ff;
+}
+
+.hero-container{
+    max-width:1250px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:55px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#eeedff;
+    color:var(--primary);
+    padding:8px 15px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:58px;
+    line-height:1.08;
+    letter-spacing:-2px;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    background:var(--gradient);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    font-size:18px;
+    color:var(--muted);
+    max-width:650px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+    padding:14px 22px;
+    border-radius:12px;
+    font-weight:700;
+    border:0;
+    transition:.3s;
+}
+
+.primary-btn{
+    color:white;
+    background:var(--gradient);
+    box-shadow:0 10px 25px rgba(79,70,229,.22);
+}
+
+.secondary-btn{
+    background:white;
+    color:var(--primary);
+    border:1px solid #dfe1eb;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================
+   AI DASHBOARD
+========================= */
+.dashboard{
+    background:rgba(255,255,255,.75);
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow:0 25px 60px rgba(55,48,163,.15);
+    border-radius:28px;
+    padding:22px;
+    backdrop-filter:blur(20px);
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+.dashboard-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.dashboard-title{
+    font-weight:800;
+}
+
+.online{
+    font-size:12px;
+    color:#16a34a;
+    background:#dcfce7;
+    padding:6px 10px;
+    border-radius:20px;
+}
+
+.match-card{
+    background:var(--gradient);
+    color:white;
+    border-radius:20px;
+    padding:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.match-card small{
+    opacity:.8;
+}
+
+.match-card h2{
+    font-size:27px;
+}
+
+.circle{
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:conic-gradient(#fff 88%,rgba(255,255,255,.2) 0);
+    position:relative;
+}
+
+.circle::after{
+    content:"";
+    position:absolute;
+    width:68px;
+    height:68px;
+    background:#5d4be7;
+    border-radius:50%;
+}
+
+.circle strong{
+    position:relative;
+    z-index:2;
+}
+
+.recommendation{
+    background:#f8f8ff;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.recommendation h3{
+    margin:4px 0;
+}
+
+.recommendation p{
+    margin:0;
+    font-size:13px;
+    color:var(--muted);
+}
+
+.skill{
+    margin-top:14px;
+}
+
+.skill-head{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.progress{
+    height:8px;
+    background:#e8e8f4;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    background:var(--gradient);
+    border-radius:20px;
+}
+
+.ai-status{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+}
+
+.status-box{
+    flex:1;
+    background:white;
+    border:1px solid #e7e7ef;
+    padding:12px;
+    border-radius:13px;
+    font-size:12px;
+}
+
+.status-box strong{
+    display:block;
+    font-size:17px;
+}
+
+/* =========================
+   JOURNEY
+========================= */
+.section{
+    padding:90px 25px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-heading span{
+    color:var(--primary);
+    font-weight:800;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.section-heading h2{
+    font-size:38px;
+    margin:8px 0;
+}
+
+.section-heading p{
+    color:var(--muted);
+    max-width:650px;
+    margin:auto;
+}
+
+.journey{
+    background:#111633;
+    color:white;
+}
+
+.journey .section-heading p{
+    color:#c5c8d8;
+}
+
+.journey-track{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+
+.journey-step{
+    text-align:center;
+    padding:15px 5px;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.journey-step:hover,
+.journey-step.active{
+    background:rgba(255,255,255,.1);
+    transform:translateY(-5px);
+}
+
+.step-circle{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:var(--gradient);
+    display:grid;
+    place-items:center;
+    margin:0 auto 10px;
+    font-weight:800;
+}
+
+.journey-step span{
+    font-size:12px;
+    font-weight:700;
+}
+
+/* =========================
+   STATS
+========================= */
+.stats{
+    background:white;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.stat{
+    text-align:center;
+    padding:25px;
+}
+
+.stat h2{
+    font-size:38px;
+    background:var(--gradient);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.stat p{
+    color:var(--muted);
+}
+
+/* =========================
+   FEATURE CARDS
+========================= */
+.features-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e9eaf1;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 30px rgba(30,41,90,.05);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 18px 40px rgba(30,41,90,.1);
+}
+
+.icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    background:#eeedff;
+    font-size:22px;
+    margin-bottom:17px;
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* =========================
+   CAREER PATHS
+========================= */
+.career-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.career-card{
+    background:white;
+    border:1px solid #e6e7ef;
+    border-radius:22px;
+    padding:25px;
+    transition:.3s;
+}
+
+.career-card:hover{
+    transform:translateY(-6px);
+}
+
+.career-icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.career-card h3{
+    margin-bottom:7px;
+}
+
+.career-card p{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.tag{
+    display:inline-block;
+    background:#f0efff;
+    color:var(--primary);
+    padding:5px 9px;
+    border-radius:7px;
+    font-size:11px;
+    margin:2px;
+}
+
+.view-btn{
+    border:0;
+    background:none;
+    color:var(--primary);
+    font-weight:800;
+    margin-top:16px;
+}
+
+/* =========================
+   ROADMAP
+========================= */
+.roadmap{
+    background:#f0f1ff;
+}
+
+.roadmap-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
+}
+
+.roadmap-card{
+    background:white;
+    padding:20px 12px;
+    border-radius:17px;
+    text-align:center;
+    border:1px solid #e2e3f1;
+}
+
+.roadmap-number{
+    width:38px;
+    height:38px;
+    margin:auto auto 12px;
+    border-radius:50%;
+    background:var(--gradient);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-weight:800;
+}
+
+.roadmap-card p{
+    font-size:13px;
+    font-weight:700;
+}
+
+/* =========================
+   COURSES
+========================= */
+.course-grid,
+.certificate-grid,
+.internship-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.course-card,
+.certificate-card,
+.internship-card{
+    background:white;
+    border-radius:20px;
+    padding:24px;
+    border:1px solid #e6e7ef;
+}
+
+.course-top{
+    height:130px;
+    border-radius:15px;
+    background:var(--gradient);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+    margin-bottom:18px;
+}
+
+.course-card p,
+.certificate-card p,
+.internship-card p{
+    color:var(--muted);
+    font-size:14px;
+    margin:7px 0 17px;
+}
+
+/* =========================
+   CERTIFICATES
+========================= */
+.certificate-preview{
+    border:3px solid #e5e7eb;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    background:#fff;
+}
+
+.certificate-preview .cert-icon{
+    font-size:38px;
+}
+
+.certificate-preview h3{
+    margin:10px 0;
+}
+
+/* =========================
+   ABOUT
+========================= */
+.about{
+    background:#111633;
+    color:white;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about p{
+    color:#c8cada;
+    margin:15px 0;
+}
+
+.about-list{
+    list-style:none;
+}
+
+.about-list li{
+    margin:12px 0;
+    color:#dfe1ef;
+}
+
+/* =========================
+   CTA
+========================= */
+.cta{
+    padding:80px 25px;
+}
+
+.cta-box{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+    background:var(--gradient);
+    color:white;
+    padding:65px 25px;
+    border-radius:30px;
+    box-shadow:0 25px 60px rgba(79,70,229,.25);
+}
+
+.cta-box h2{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.cta-box p{
+    opacity:.9;
+    margin-bottom:25px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+    background:#0d1027;
+    color:white;
+    padding:45px 25px;
+}
+
+.footer-container{
+    max-width:1150px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+}
+
+footer p{
+    color:#aeb3c9;
+    font-size:13px;
+    margin-top:8px;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(8,12,35,.65);
+    backdrop-filter:blur(7px);
+    z-index:3000;
+    padding:20px;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:550px;
+    max-height:90vh;
+    overflow:auto;
+    background:white;
+    border-radius:24px;
+    padding:30px;
+    position:relative;
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+    from{
+        transform:translateY(20px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    border:0;
+    background:#f1f2f7;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    font-size:20px;
+}
+
+.modal-box h2{
+    margin-bottom:10px;
+    padding-right:40px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    margin-bottom:15px;
+}
+
+.modal-box ul{
+    margin:15px 0 20px 20px;
+}
+
+.modal-box li{
+    margin:7px 0;
+}
+
+/* Assessment */
+.question{
+    margin:20px 0;
+}
+
+.question label{
+    display:block;
+    padding:11px;
+    border:1px solid #e1e2eb;
+    border-radius:10px;
+    margin:8px 0;
+    cursor:pointer;
+}
+
+.question label:hover{
+    background:#f4f3ff;
+}
+
+.question input{
+    margin-right:8px;
+}
+
+.result{
+    background:#eeedff;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+    display:none;
+}
+
+/* =========================
+   TOAST
+========================= */
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#111633;
+    color:white;
+    padding:14px 20px;
+    border-radius:12px;
+    z-index:5000;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:1050px){
+
+    .nav-links{
+        gap:12px;
+        font-size:12px;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    .features-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .journey-track{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .roadmap-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .menu-btn{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:white;
+        flex-direction:column;
+        padding:20px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .hero-container,
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:120px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .career-grid,
+    .course-grid,
+    .certificate-grid,
+    .internship-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    .hero h1{
+        font-size:34px;
+        letter-spacing:-1px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .section-heading h2{
+        font-size:30px;
+    }
+
+    .features-grid,
+    .career-grid,
+    .course-grid,
+    .certificate-grid,
+    .internship-grid,
+    .roadmap-grid,
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .journey-track{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-container{
+        flex-direction:column;
+    }
+
+    .cta-box h2{
+        font-size:30px;
+    }
+
+    .dashboard{
+        padding:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<a href="#home" class="logo">
+    ✦ AI <span>Career Compass</span>
+</a>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<div class="nav-links" id="navLinks">
+
+<a href="#home">Home</a>
+<a href="#journey">How It Works</a>
+<a href="#careers">Career Paths</a>
+<a href="#courses">Courses</a>
+<a href="#certificates">Certificates</a>
+<a href="#internships">Internships</a>
+<a href="#about">About</a>
+
+<a href="#" class="login-btn" onclick="openLogin(event)">Login</a>
+
+<a href="#assessment" class="start-btn"
+onclick="openAssessment(event)">
+Get Started
+</a>
+
+</div>
+
+</div>
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+<div class="hero-container">
+
+<div>
+
+<div class="badge">
+🤖 AI-Powered Career Guidance
+</div>
+
+<h1>
+Discover the Right Career.
+<span>Build the Right Skills.</span>
+Start Your Future.
+</h1>
+
+<p>
+AI-powered career guidance that helps students discover suitable careers,
+identify skill gaps, learn step-by-step, get certified, and find internship
+opportunities.
+</p>
+
+<div class="hero-buttons">
+
+<button class="primary-btn"
+onclick="openAssessment()">
+Take Career Assessment →
+</button>
+
+<button class="secondary-btn"
+onclick="scrollToSection('careers')">
+Explore Career Paths
+</button>
+
+</div>
+
+</div>
+
+
+<!-- AI DASHBOARD -->
+
+<div class="dashboard">
+
+<div class="dashboard-top">
+
+<div class="dashboard-title">
+AI Career Dashboard
+</div>
+
+<div class="online">
+● AI Active
+</div>
+
+</div>
+
+<div class="match-card">
+
+<div>
+<small>Career Match</small>
+<h2>Data Analyst</h2>
+<p style="color:white;margin:5px 0 0;font-size:13px;">
+Based on your skills
+</p>
+</div>
+
+<div class="circle">
+<strong>88%</strong>
+</div>
+
+</div>
+
+<div class="recommendation">
+
+<small>Recommended Career</small>
+
+<h3>📊 Data Analyst</h3>
+
+<p>
+Strong match based on analytical thinking,
+SQL and visualization interests.
+</p>
+
+<div class="skill">
+
+<div class="skill-head">
+<span>SQL</span>
+<span>82%</span>
+</div>
+
+<div class="progress">
+<div style="width:82%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-head">
+<span>Excel</span>
+<span>90%</span>
+</div>
+
+<div class="progress">
+<div style="width:90%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-head">
+<span>Python</span>
+<span>58%</span>
+</div>
+
+<div class="progress">
+<div style="width:58%"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="ai-status">
+
+<div class="status-box">
+<strong>72%</strong>
+Skill Readiness
+</div>
+
+<div class="status-box">
+<strong>4</strong>
+Courses
+</div>
+
+<div class="status-box">
+<strong>3</strong>
+Internships
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     JOURNEY
+========================= -->
+
+<section class="section journey" id="journey">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Your Career Journey</span>
+
+<h2>From Confusion to Career Opportunity</h2>
+
+<p>
+One intelligent journey connecting career discovery,
+skill development and real-world opportunities.
+</p>
+
+</div>
+
+<div class="journey-track">
+
+<div class="journey-step active" onclick="journeyClick('ASSESS')">
+<div class="step-circle">1</div>
+<span>ASSESS</span>
+</div>
+
+<div class="journey-step" onclick="journeyClick('DISCOVER')">
+<div class="step-circle">2</div>
+<span>DISCOVER</span>
+</div>
+
+<div class="journey-step" onclick="journeyClick('ANALYZE')">
+<div class="step-circle">3</div>
+<span>ANALYZE</span>
+</div>
+
+<div class="journey-step" onclick="journeyClick('LEARN')">
+<div class="step-circle">4</div>
+<span>LEARN</span>
+</div>
+
+<div class="journey-step" onclick="journeyClick('CERTIFY')">
+<div class="step-circle">5</div>
+<span>CERTIFY</span>
+</div>
+
+<div class="journey-step" onclick="journeyClick('INTERN')">
+<div class="step-circle">6</div>
+<span>INTERN</span>
+</div>
+
+<div class="journey-step" onclick="journeyClick('GROW')">
+<div class="step-circle">7</div>
+<span>GROW</span>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section class="section stats">
+
+<div class="container">
+
+<div class="stats-grid">
+
+<div class="stat">
+<h2>50+</h2>
+<p>Career Paths</p>
+</div>
+
+<div class="stat">
+<h2>120+</h2>
+<p>Learning Courses</p>
+</div>
+
+<div class="stat">
+<h2>500+</h2>
+<p>Skills</p>
+</div>
+
+<div class="stat">
+<h2>100+</h2>
+<p>Internship Opportunities</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     WHY AI CAREER COMPASS
+========================= -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Why Choose Us</span>
+
+<h2>Everything You Need to Build Your Career</h2>
+
+<p>
+A complete student-focused career ecosystem powered by intelligent guidance.
+</p>
+
+</div>
+
+
+<div class="features-grid">
+
+<div class="card">
+<div class="icon">🎯</div>
+<h3>Personalized Career Recommendations</h3>
+<p>
+Discover careers that match your interests,
+skills and strengths.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🔍</div>
+<h3>Skill Gap Analysis</h3>
+<p>
+Understand which skills you already have
+and which ones you need.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📚</div>
+<h3>Career-Specific Learning</h3>
+<p>
+Learn only the skills required for your
+selected career path.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🗺️</div>
+<h3>Step-by-Step Roadmaps</h3>
+<p>
+Follow structured learning roadmaps
+instead of random courses.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🏆</div>
+<h3>Certificates</h3>
+<p>
+Earn certificates that demonstrate your
+learning achievements.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">💼</div>
+<h3>Internship Opportunities</h3>
+<p>
+Discover internships related to your
+skills and career goal.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🧑‍💻</div>
+<h3>Career Support</h3>
+<p>
+Get guidance throughout your career
+development journey.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📈</div>
+<h3>Career Growth</h3>
+<p>
+Track your progress and continuously
+improve your professional profile.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     CAREER PATHS
+========================= -->
+
+<section class="section" id="careers">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Explore Opportunities</span>
+
+<h2>Popular Career Paths</h2>
+
+<p>
+Explore career options and discover the skills required to enter each field.
+</p>
+
+</div>
+
+
+<div class="career-grid">
+
+<div class="career-card">
+
+<div class="career-icon">📊</div>
+
+<h3>Data Analyst</h3>
+
+<p>
+Analyze data and create insights that help businesses make better decisions.
+</p>
+
+<span class="tag">SQL</span>
+<span class="tag">Excel</span>
+<span class="tag">Python</span>
+<span class="tag">Tableau</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCareer('Data Analyst')">
+View Career →
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">💻</div>
+
+<h3>Software Developer</h3>
+
+<p>
+Build software applications and solve real-world problems using code.
+</p>
+
+<span class="tag">Java</span>
+<span class="tag">C++</span>
+<span class="tag">SQL</span>
+<span class="tag">Git</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCareer('Software Developer')">
+View Career →
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">🌐</div>
+
+<h3>Web Developer</h3>
+
+<p>
+Design and develop modern websites and interactive web applications.
+</p>
+
+<span class="tag">HTML</span>
+<span class="tag">CSS</span>
+<span class="tag">JavaScript</span>
+<span class="tag">React</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCareer('Web Developer')">
+View Career →
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">🔐</div>
+
+<h3>Cybersecurity Analyst</h3>
+
+<p>
+Protect systems, networks and data from security threats.
+</p>
+
+<span class="tag">Networking</span>
+<span class="tag">Linux</span>
+<span class="tag">Security</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCareer('Cybersecurity Analyst')">
+View Career →
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">🗄️</div>
+
+<h3>Database Developer</h3>
+
+<p>
+Design, manage and optimize databases for applications and businesses.
+</p>
+
+<span class="tag">SQL</span>
+<span class="tag">MySQL</span>
+<span class="tag">Database</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCareer('Database Developer')">
+View Career →
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">🎨</div>
+
+<h3>UI/UX Designer</h3>
+
+<p>
+Create user-friendly digital experiences and beautiful interfaces.
+</p>
+
+<span class="tag">Figma</span>
+<span class="tag">UX</span>
+<span class="tag">Design</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCareer('UI/UX Designer')">
+View Career →
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     ROADMAP
+========================= -->
+
+<section class="section roadmap">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Your Roadmap</span>
+
+<h2>Six Steps to Your Career</h2>
+
+</div>
+
+<div class="roadmap-grid">
+
+<div class="roadmap-card">
+<div class="roadmap-number">1</div>
+<p>Take Assessment</p>
+</div>
+
+<div class="roadmap-card">
+<div class="roadmap-number">2</div>
+<p>Choose Career</p>
+</div>
+
+<div class="roadmap-card">
+<div class="roadmap-number">3</div>
+<p>Analyze Skills</p>
+</div>
+
+<div class="roadmap-card">
+<div class="roadmap-number">4</div>
+<p>Learn</p>
+</div>
+
+<div class="roadmap-card">
+<div class="roadmap-number">5</div>
+<p>Get Certified</p>
+</div>
+
+<div class="roadmap-card">
+<div class="roadmap-number">6</div>
+<p>Find Internship</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     COURSES
+========================= -->
+
+<section class="section" id="courses">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Learn & Grow</span>
+
+<h2>Featured Courses</h2>
+
+<p>
+Build practical skills through structured career-focused learning.
+</p>
+
+</div>
+
+
+<div class="course-grid">
+
+<div class="course-card">
+
+<div class="course-top">📊</div>
+
+<h3>Data Analytics Fundamentals</h3>
+
+<p>
+Learn Excel, SQL, data cleaning,
+visualization and analytics basics.
+</p>
+
+<span class="tag">Beginner</span>
+<span class="tag">6 Weeks</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCourse('Data Analytics Fundamentals')">
+View Course →
+</button>
+
+</div>
+
+
+<div class="course-card">
+
+<div class="course-top">🌐</div>
+
+<h3>Web Development</h3>
+
+<p>
+Build responsive websites using HTML,
+CSS and JavaScript.
+</p>
+
+<span class="tag">Beginner</span>
+<span class="tag">8 Weeks</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCourse('Web Development')">
+View Course →
+</button>
+
+</div>
+
+
+<div class="course-card">
+
+<div class="course-top">🐍</div>
+
+<h3>Python for Data Science</h3>
+
+<p>
+Learn Python fundamentals and start
+working with data.
+</p>
+
+<span class="tag">Beginner</span>
+<span class="tag">7 Weeks</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCourse('Python for Data Science')">
+View Course →
+</button>
+
+</div>
+
+
+<div class="course-card">
+
+<div class="course-top">🔐</div>
+
+<h3>Cybersecurity Basics</h3>
+
+<p>
+Understand networking, threats,
+security principles and protection.
+</p>
+
+<span class="tag">Beginner</span>
+<span class="tag">5 Weeks</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openCourse('Cybersecurity Basics')">
+View Course →
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     CERTIFICATES
+========================= -->
+
+<section class="section" id="certificates">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Recognize Your Skills</span>
+
+<h2>Certificates That Showcase Your Progress</h2>
+
+<p>
+Complete learning paths and showcase your achievements.
+</p>
+
+</div>
+
+
+<div class="certificate-grid">
+
+<div class="certificate-card">
+
+<div class="certificate-preview">
+
+<div class="cert-icon">🏆</div>
+
+<h3>Data Analytics Certificate</h3>
+
+<p>AI Career Compass</p>
+
+</div>
+
+<button class="view-btn"
+onclick="openCertificate('Data Analytics Certificate')">
+View Certificate →
+</button>
+
+</div>
+
+
+<div class="certificate-card">
+
+<div class="certificate-preview">
+
+<div class="cert-icon">🏆</div>
+
+<h3>Web Development Certificate</h3>
+
+<p>AI Career Compass</p>
+
+</div>
+
+<button class="view-btn"
+onclick="openCertificate('Web Development Certificate')">
+View Certificate →
+</button>
+
+</div>
+
+
+<div class="certificate-card">
+
+<div class="certificate-preview">
+
+<div class="cert-icon">🏆</div>
+
+<h3>Python Basics Certificate</h3>
+
+<p>AI Career Compass</p>
+
+</div>
+
+<button class="view-btn"
+onclick="openCertificate('Python Basics Certificate')">
+View Certificate →
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     INTERNSHIPS
+========================= -->
+
+<section class="section" id="internships">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>Get Real Experience</span>
+
+<h2>Internship Opportunities</h2>
+
+<p>
+Turn your skills into practical experience with relevant internships.
+</p>
+
+</div>
+
+
+<div class="internship-grid">
+
+<div class="internship-card">
+
+<h3>📊 Data Visualization Intern</h3>
+
+<p>
+Work on dashboards and transform business
+data into meaningful visual insights.
+</p>
+
+<span class="tag">Remote</span>
+<span class="tag">Data</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openInternship('Data Visualization Intern')">
+View Opportunity →
+</button>
+
+</div>
+
+
+<div class="internship-card">
+
+<h3>🌐 Web Development Intern</h3>
+
+<p>
+Build responsive websites and work with
+front-end technologies.
+</p>
+
+<span class="tag">Hybrid</span>
+<span class="tag">Web</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openInternship('Web Development Intern')">
+View Opportunity →
+</button>
+
+</div>
+
+
+<div class="internship-card">
+
+<h3>📈 Junior Data Analyst Intern</h3>
+
+<p>
+Work with datasets, SQL queries and
+business reporting.
+</p>
+
+<span class="tag">On-site</span>
+<span class="tag">Analytics</span>
+
+<br>
+
+<button class="view-btn"
+onclick="openInternship('Junior Data Analyst Intern')">
+View Opportunity →
+</button>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="section about" id="about">
+
+<div class="container">
+
+<div class="about-grid">
+
+<div>
+
+<span style="color:#9c8cff;font-weight:800;">
+ABOUT AI CAREER COMPASS
+</span>
+
+<h2 style="font-size:42px;margin-top:10px;">
+One Platform. Your Complete Career Journey.
+</h2>
+
+<p>
+AI Career Compass is a student-focused platform designed to
+connect career assessment, skill gap analysis, learning,
+certification and internship discovery in one place.
+</p>
+
+<p>
+Instead of searching across multiple platforms, students can
+follow a structured journey from discovering their career
+interest to becoming internship-ready.
+</p>
+
+</div>
+
+
+<div>
+
+<ul class="about-list">
+
+<li>✓ Personalized career discovery</li>
+<li>✓ Skill gap identification</li>
+<li>✓ Structured learning roadmaps</li>
+<li>✓ Industry-relevant courses</li>
+<li>✓ Digital certificates</li>
+<li>✓ Internship opportunities</li>
+<li>✓ Career progress tracking</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+<div class="cta-box">
+
+<h2>Your Future Starts With One Decision.</h2>
+
+<p>
+Stop guessing. Start discovering.
+Build the skills your future career needs.
+</p>
+
+<button class="primary-btn"
+style="background:white;color:#4f46e5;"
+onclick="openAssessment()">
+Start Your Career Journey →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+
+<div class="logo" style="color:white;">
+✦ AI <span>Career Compass</span>
+</div>
+
+<p>
+Career Guidance • Learning • Certification • Internship
+</p>
+
+</div>
+
+<div>
+
+<p>
+© 2026 AI Career Compass
+</p>
+
+<p>
+Designed for students & future professionals.
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- =========================
+     ASSESSMENT MODAL
+========================= -->
+
+<div class="modal" id="assessmentModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('assessmentModal')">
+×
+</button>
+
+<h2>🎯 Career Assessment</h2>
+
+<p>
+Answer these questions to get a sample AI career recommendation.
+</p>
+
+
+<div class="question">
+
+<strong>1. What do you enjoy most?</strong>
+
+<label>
+<input type="radio" name="q1" value="data">
+Working with data and numbers
+</label>
+
+<label>
+<input type="radio" name="q1" value="web">
+Creating websites and applications
+</label>
+
+<label>
+<input type="radio" name="q1" value="security">
+Protecting systems and information
+</label>
+
+</div>
+
+
+<div class="question">
+
+<strong>2. Which activity sounds interesting?</strong>
+
+<label>
+<input type="radio" name="q2" value="data">
+Finding patterns in information
+</label>
+
+<label>
+<input type="radio" name="q2" value="web">
+Designing digital experiences
+</label>
+
+<label>
+<input type="radio" name="q2" value="security">
+Solving security problems
+</label>
+
+</div>
+
+
+<div class="question">
+
+<strong>3. What would you like to learn?</strong>
+
+<label>
+<input type="radio" name="q3" value="data">
+Python / SQL / Tableau
+</label>
+
+<label>
+<input type="radio" name="q3" value="web">
+HTML / CSS / JavaScript
+</label>
+
+<label>
+<input type="radio" name="q3" value="security">
+Networking / Cybersecurity
+</label>
+
+</div>
+
+
+<button class="primary-btn"
+onclick="calculateAssessment()">
+Get My Recommendation
+</button>
+
+
+<div class="result" id="assessmentResult"></div>
+
+</div>
+</div>
+
+
+<!-- =========================
+     GENERAL MODAL
+========================= -->
+
+<div class="modal" id="infoModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('infoModal')">
+×
+</button>
+
+<div id="modalContent"></div>
+
+</div>
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+function toggleMenu(){
+
+    document
+    .getElementById("navLinks")
+    .classList.toggle("show");
+
+}
+
+
+/* =========================
+   SMOOTH SCROLL
+========================= */
+
+function scrollToSection(id){
+
+    document
+    .getElementById(id)
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   ASSESSMENT
+========================= */
+
+function openAssessment(event){
+
+    if(event){
+        event.preventDefault();
+    }
+
+    document
+    .getElementById("assessmentModal")
+    .classList.add("show");
+
+}
+
+
+function calculateAssessment(){
+
+    let selected =
+        document.querySelectorAll(
+            'input[type="radio"]:checked'
+        );
+
+    if(selected.length < 3){
+
+        showToast(
+            "Please answer all 3 questions."
+        );
+
+        return;
+    }
+
+    let scores = {
+        data:0,
+        web:0,
+        security:0
+    };
+
+    selected.forEach(function(item){
+
+        scores[item.value]++;
+
+    });
+
+    let career =
+        Object.keys(scores)
+        .reduce(function(a,b){
+
+            return scores[a] > scores[b] ? a : b;
+
+        });
+
+    let result = "";
+
+    if(career === "data"){
+
+        result = `
+        <h3>🎉 Recommended Career: Data Analyst</h3>
+
+        <p>
+        Your answers show strong interest in
+        data, analysis and problem solving.
+        </p>
+
+        <strong>Recommended Skills:</strong>
+
+        <ul>
+            <li>Excel</li>
+            <li>SQL</li>
+            <li>Python</li>
+            <li>Tableau / Power BI</li>
+        </ul>
+
+        <button class="primary-btn"
+        onclick="closeModal('assessmentModal');scrollToSection('courses')">
+        Start Learning
+        </button>
+        `;
+
+    }
+
+    else if(career === "web"){
+
+        result = `
+        <h3>🎉 Recommended Career: Web Developer</h3>
+
+        <p>
+        Your answers show strong interest in
+        creating websites and digital applications.
+        </p>
+
+        <strong>Recommended Skills:</strong>
+
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+        </ul>
+
+        <button class="primary-btn"
+        onclick="closeModal('assessmentModal');scrollToSection('courses')">
+        Start Learning
+        </button>
+        `;
+
+    }
+
+    else{
+
+        result = `
+        <h3>🎉 Recommended Career: Cybersecurity Analyst</h3>
+
+        <p>
+        Your answers show strong interest in
+        security and protecting technology.
+        </p>
+
+        <strong>Recommended Skills:</strong>
+
+        <ul>
+            <li>Networking</li>
+            <li>Linux</li>
+            <li>Cybersecurity Fundamentals</li>
+            <li>Threat Analysis</li>
+        </ul>
+
+        <button class="primary-btn"
+        onclick="closeModal('assessmentModal');scrollToSection('courses')">
+        Start Learning
+        </button>
+        `;
+
+    }
+
+    document
+    .getElementById("assessmentResult")
+    .innerHTML = result;
+
+    document
+    .getElementById("assessmentResult")
+    .style.display = "block";
+
+}
+
+
+/* =========================
+   CAREER MODAL
+========================= */
+
+function openCareer(career){
+
+    let data = {
+
+        "Data Analyst":{
+            description:
+            "A Data Analyst collects, cleans and analyzes data to help organizations make better decisions.",
+            skills:
+            ["Excel","SQL","Python","Tableau","Statistics"],
+            roadmap:
+            "Excel → SQL → Data Cleaning → Python → Visualization → Projects → Internship"
+        },
+
+        "Software Developer":{
+            description:
+            "Software Developers design, build and maintain software applications.",
+            skills:
+            ["Programming","OOP","Data Structures","SQL","Git"],
+            roadmap:
+            "Programming → OOP → DSA → Database → Projects → Git → Internship"
+        },
+
+        "Web Developer":{
+            description:
+            "Web Developers create responsive websites and interactive web applications.",
+            skills:
+            ["HTML","CSS","JavaScript","React","Git"],
+            roadmap:
+            "HTML → CSS → JavaScript → React → Projects → Portfolio → Internship"
+        },
+
+        "Cybersecurity Analyst":{
+            description:
+            "Cybersecurity Analysts protect applications, networks and data against security threats.",
+            skills:
+            ["Networking","Linux","Security","Threat Detection"],
+            roadmap:
+            "Networking → Linux → Security Fundamentals → Tools → Labs → Certification"
+        },
+
+        "Database Developer":{
+            description:
+            "Database Developers design and optimize databases used by applications.",
+            skills:
+            ["SQL","MySQL","Database Design","Normalization"],
+            roadmap:
+            "SQL → Database Design → MySQL → Queries → Optimization → Projects"
+        },
+
+        "UI/UX Designer":{
+            description:
+            "UI/UX Designers create intuitive and visually appealing digital experiences.",
+            skills:
+            ["Figma","Wireframing","Prototyping","UX Research"],
+            roadmap:
+            "Design Basics → Figma → Wireframes → Prototypes → Portfolio"
+        }
+
+    };
+
+    let item = data[career];
+
+    let skills =
+        item.skills
+        .map(skill => `<span class="tag">${skill}</span>`)
+        .join(" ");
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <h2>🚀 ${career}</h2>
+
+        <p>${item.description}</p>
+
+        <h3>Skills Required</h3>
+
+        <div style="margin:12px 0 20px;">
+        ${skills}
+        </div>
+
+        <h3>Suggested Roadmap</h3>
+
+        <p>${item.roadmap}</p>
+
+        <button class="primary-btn"
+        onclick="showToast('Career path added to your journey!');closeModal('infoModal')">
+        Add to My Career Plan
+        </button>
+
+    `;
+
+    document
+    .getElementById("infoModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   COURSE MODAL
+========================= */
+
+function openCourse(course){
+
+    let courses = {
+
+        "Data Analytics Fundamentals":[
+            "Excel & Data Handling",
+            "SQL Basics",
+            "Data Cleaning",
+            "Data Visualization",
+            "Dashboard Creation"
+        ],
+
+        "Web Development":[
+            "HTML Fundamentals",
+            "CSS & Responsive Design",
+            "JavaScript",
+            "DOM Manipulation",
+            "Web Projects"
+        ],
+
+        "Python for Data Science":[
+            "Python Basics",
+            "Lists & Dictionaries",
+            "Functions",
+            "Pandas",
+            "Data Visualization"
+        ],
+
+        "Cybersecurity Basics":[
+            "Networking Basics",
+            "Linux Fundamentals",
+            "Cybersecurity Concepts",
+            "Threats & Attacks",
+            "Security Practices"
+        ]
+
+    };
+
+    let list =
+        courses[course]
+        .map(x => `<li>${x}</li>`)
+        .join("");
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <h2>📚 ${course}</h2>
+
+        <p>
+        This beginner-friendly course is designed
+        to build practical skills step by step.
+        </p>
+
+        <h3>What You Will Learn</h3>
+
+        <ul>
+        ${list}
+        </ul>
+
+        <button class="primary-btn"
+        onclick="showToast('Course started! Demo mode activated.');closeModal('infoModal')">
+        Start Learning
+        </button>
+
+    `;
+
+    document
+    .getElementById("infoModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   CERTIFICATE MODAL
+========================= */
+
+function openCertificate(certificate){
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <div style="
+        border:4px solid #4f46e5;
+        padding:30px;
+        text-align:center;
+        border-radius:15px;
+        ">
+
+            <div style="font-size:50px;">🏆</div>
+
+            <small>CERTIFICATE OF COMPLETION</small>
+
+            <h2 style="margin:15px 0;">
+            ${certificate}
+            </h2>
+
+            <p>
+            This certificate recognizes successful
+            completion of the learning pathway.
+            </p>
+
+            <strong>
+            AI Career Compass
+            </strong>
+
+            <br><br>
+
+            <button class="primary-btn"
+            onclick="showToast('Certificate preview opened!');">
+            Download Preview
+            </button>
+
+        </div>
+
+    `;
+
+    document
+    .getElementById("infoModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   INTERNSHIP MODAL
+========================= */
+
+function openInternship(internship){
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <h2>💼 ${internship}</h2>
+
+        <p>
+        Gain practical industry experience while
+        working on real-world projects.
+        </p>
+
+        <h3>Opportunity Details</h3>
+
+        <ul>
+
+            <li>Duration: 8–12 Weeks</li>
+
+            <li>Mode: Flexible</li>
+
+            <li>Level: Beginner / Fresher</li>
+
+            <li>Skills: Career-specific</li>
+
+            <li>Certificate: Yes</li>
+
+        </ul>
+
+        <button class="primary-btn"
+        onclick="
+        showToast('Application submitted successfully! Demo only.');
+        closeModal('infoModal');
+        ">
+        Apply Now →
+        </button>
+
+    `;
+
+    document
+    .getElementById("infoModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function openLogin(event){
+
+    if(event){
+        event.preventDefault();
+    }
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <h2>🔐 Login</h2>
+
+        <p>
+        Login functionality is shown as a frontend demo.
+        </p>
+
+        <input
+        type="email"
+        placeholder="Email Address"
+        style="
+        width:100%;
+        padding:13px;
+        border:1px solid #ddd;
+        border-radius:10px;
+        margin:10px 0;
+        ">
+
+        <input
+        type="password"
+        placeholder="Password"
+        style="
+        width:100%;
+        padding:13px;
+        border:1px solid #ddd;
+        border-radius:10px;
+        margin:10px 0 18px;
+        ">
+
+        <button class="primary-btn"
+        onclick="
+        showToast('Login demo submitted!');
+        closeModal('infoModal');
+        ">
+        Login
+        </button>
+
+    `;
+
+    document
+    .getElementById("infoModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   CLOSE MODALS
+========================= */
+
+function closeModal(id){
+
+    document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   JOURNEY INTERACTION
+========================= */
+
+function journeyClick(step){
+
+    showToast(
+        step + " stage selected"
+    );
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    let toast =
+        document.getElementById("toast");
+
+    if(!toast){
+
+        toast =
+        document.createElement("div");
+
+        toast.id = "toast";
+
+        toast.className = "toast";
+
+        document.body.appendChild(toast);
+
+    }
+
+    toast.innerText = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================
+   CLOSE ON OUTSIDE CLICK
+========================= */
+
+window.addEventListener("click",function(event){
+
+    if(event.target.classList.contains("modal")){
+
+        event.target.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================
+   ESCAPE KEY
+========================= */
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "Escape"){
+
+        document
+        .querySelectorAll(".modal")
+        .forEach(function(modal){
+
+            modal.classList.remove("show");
+
+        });
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
